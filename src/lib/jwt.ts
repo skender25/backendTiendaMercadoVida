@@ -1,5 +1,5 @@
 import { IJwt } from './../interfaces/jwt.interface';
-import { SECRET_KEY, MESSAGES, EXPIRETIME } from './../config/constans';
+import { SECRET_KEY, MESSAGES, EXPIRETIME } from '../config/constans';
 import jwt from 'jsonwebtoken';
 
 class JWT {

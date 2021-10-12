@@ -17,6 +17,9 @@ const resolversProductMutation: IResolvers ={
         // Añadimos la llamada al servicio
         return new ProductsService(_, variables, context).delete();
       },
+      blockProducts(_, variables, context) {
+        return new ProductsService(_, variables, context).block();
+      },
     }
 };
 

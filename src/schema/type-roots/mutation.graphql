@@ -1,6 +1,26 @@
  type Mutation{
     register(user: UserInput!): ResultUser
-    addProducts(product: String! , productor: String! , ): ResultProducts
-    updateProducts(id: ID! ,product: String! , ): ResultProducts
+    updateUser(user: UserInput!): ResultUser
+    deleteUser(id: ID!): ResultUser
+    blockUser(id: ID!): ResultUser
+    addProducts(product: String! , productor: String! , catregoria: String,
+    imagen: String,
+    precio_unidad: String,
+    cantidad_disp: String,
+    org: String,
+    unidad: String ): ResultProducts
+    updateProducts(id: ID! ,product: String! ,productor: String!,catregoria: String,
+    imagen: String,
+    precio_unidad: String,
+    cantidad_disp: String,
+    org: String,
+    unidad: String ): ResultProducts
     deleteProducts(id: ID!): ResultProducts
+    blockProducts(id: ID!): ResultProducts
+    "Envio de emails automáticos"
+    sendEmail(mail: MailInput!): ResultMail
+    activeUserEmail(id: ID!, email: String!): ResultMail
+    activeUserAction(id: ID!, birthday: String!, password: String!): ResultMail
+    resetPassword(email: String!): ResultMail
+    changePassword(id: ID!, password: String!): ResultUser
 }

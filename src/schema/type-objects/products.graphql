@@ -2,4 +2,24 @@ type Products implements Item {
     id: ID!
     name: String!
     productor: String!
+    active: Boolean
+    catregoria: String
+    imagen: String
+    precio_unidad: String
+    cantidad_disp: String
+    org: String
+    unidad: String
+}
+
+type Products2 implements Item {
+    id: ID!
+    name: String!
+    productor: String!
+    active: Boolean
+    catregoria: String
+    imagen: String
+    precio_unidad: String
+    cantidad_disp: String
+    org: String
+    unidad: String
 }

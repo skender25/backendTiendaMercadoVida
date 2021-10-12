@@ -7,4 +7,5 @@ type User {
     registerDate: String!
     birthday: String!
     Role: Role!
+    active: Boolean
 }

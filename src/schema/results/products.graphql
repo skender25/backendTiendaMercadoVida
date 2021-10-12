@@ -1,8 +1,10 @@
 type ResultProducts implements Result{
+    info: ResultInfo
     "Estado de la operación"
     status: Boolean!
     "Mensaje de la operación para dar feedback"
     message: String!
     product: Products
     products:[Products!]
+    products2:[Products2!]
 }

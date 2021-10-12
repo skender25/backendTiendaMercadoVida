@@ -3,7 +3,8 @@ input UserInput{
     name: String!
     lastname: String!
     email: String!
-    password: String!
+    password: String
     birthday: String!
     Role: Role=CLIENT
+    active: Boolean
 }

@@ -5,10 +5,11 @@ import {
   findOneElement,
   insertOneElement,
   updateOneElement,
-  deleteOneElement
+  deleteOneElement,
 } from './../lib/db-operations';
 import { Db } from 'mongodb';
 import { IVariables } from '../interfaces/variables.interface';
+import { pagination } from '../lib/pagination';
 
 class ResolversOperationsService {
   private variables: IVariables;
@@ -18,7 +19,9 @@ class ResolversOperationsService {
     this.context = context;
   }
 
-  protected getContext(): IContextData { return this.context; }
+  protected getContext(): IContextData {
+    return this.context;
+  }
   protected getDb(): Db {
     return this.context.db!;
   }
@@ -27,23 +30,45 @@ class ResolversOperationsService {
   }
 
   // Listar información
-  protected async list(collection: string, listElement: string) {
+  protected async list(
+    collection: string,
+    listElement: string,
+    page: number = 1,
+    itemsPage: number = 20,
+    filter: object = { active: { $ne: false}}
+  ) {
     try {
+      console.log(page, itemsPage);
+      const paginationData = await pagination(
+        this.getDb(),
+        collection,
+        page,
+        itemsPage,
+        filter
+      );
+      console.log(paginationData);
       return {
+        info: {
+          page: paginationData.page,
+          pages: paginationData.pages,
+          itemsPage: paginationData.itemsPage,
+          total: paginationData.total,
+        },
         status: true,
         message: `Lista de ${listElement} correctamente cargada`,
-        items: await findElements(this.getDb(), collection),
+        items: await findElements(this.getDb(), collection, filter, paginationData),
       };
     } catch (error) {
       return {
+        info: null,
         status: false,
         message: `Lista de ${listElement} no cargada: ${error}`,
         items: null,
       };
     }
   }
-   // Obtener detalles del item
-   protected async get(collection: string) {
+  // Obtener detalles del item
+  protected async get(collection: string) {
     const collectionLabel = collection.toLowerCase();
     try {
       return await findOneElement(this.getDb(), collection, {
@@ -71,12 +96,12 @@ class ResolversOperationsService {
     }
   }
 
-   // Añadir item
-   protected async add(collection: string, document: object, item: string) {
+  // Añadir item
+  protected async add(collection: string, document: object, item: string) {
     try {
       return await insertOneElement(this.getDb(), collection, document).then(
         (res) => {
-            console.log('add item');
+          console.log("add item");
           if (res.result.ok === 1) {
             return {
               status: true,
@@ -99,7 +124,6 @@ class ResolversOperationsService {
       };
     }
   }
-  
 
   ///update
   protected async update(
@@ -136,31 +160,30 @@ class ResolversOperationsService {
       };
     }
   }
-// eliminar item
-protected async del(collection: string, filter: object, item: string) {
-  try {
-    return await deleteOneElement(this.getDb(), collection, filter).then(
-      (res) => {
-        if (res.deletedCount === 1) {
+  // eliminar item
+  protected async del(collection: string, filter: object, item: string) {
+    try {
+      return await deleteOneElement(this.getDb(), collection, filter).then(
+        (res) => {
+          if (res.deletedCount === 1) {
+            return {
+              status: true,
+              message: `Elemento del ${item} borrado correctamente.`,
+            };
+          }
           return {
-            status: true,
-            message: `Elemento del ${item} borrado correctamente.`,
+            status: false,
+            message: `Elemento del ${item} No se ha borrado. Comprueba el filtro.`,
           };
         }
-        return {
-          status: false,
-          message: `Elemento del ${item} No se ha borrado. Comprueba el filtro.`,
-        };
-      }
-    );
-  } catch (error) {
-    return {
-      status: false,
-      message: `Error inesperado al eliminar el ${item}. Inténtalo de nuevo por favor`,
-    };
+      );
+    } catch (error) {
+      return {
+        status: false,
+        message: `Error inesperado al eliminar el ${item}. Inténtalo de nuevo por favor`,
+      };
+    }
   }
-}
-
 }
 
 export default ResolversOperationsService;
