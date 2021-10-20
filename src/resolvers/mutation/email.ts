@@ -9,6 +9,7 @@ import { MESSAGES } from '../../config/constans';
 const resolversMailMutation: IResolvers = {
   Mutation: {
     async sendEmail(_, { mail }) {
+      console.log('mail '+ mail);
       return new MailService().send(mail);
     }, 
     async activeUserEmail(_, { id, email }) {

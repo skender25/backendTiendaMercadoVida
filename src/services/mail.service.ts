@@ -3,10 +3,12 @@ import { IMailOptions } from './../interfaces/email.interface';
 
 class MailService {
     send(mail: IMailOptions) {
+        console.log('enviando correo backend');
+        console.log('correo ' , mail)
         return new Promise((resolve, reject) => {
             transport.sendMail({
                 from: '"🏬Mercado Vida🏬" <mercadovidabd@gmail.com>', // sender address
-                to: 'alex2595h@gmail.com', // list of receivers
+                to: mail.to, // list of receivers
                 subject: mail.subject, // Subject line
                 html: mail.html, // html body
               }, (error, _) => {
