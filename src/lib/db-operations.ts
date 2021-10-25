@@ -142,9 +142,9 @@ export const randomItems2 = async(
 ): Promise<Array<object>> => {
   return new Promise(async(resolve) => {
     const pipeline = [
-      { $match: {'productor': filter} }
+      { $match: {'catregoria': filter} }
     ];
-    console.log(filter);
+    console.log('randomItems 2 ' ,filter);
     resolve(await database.collection(collection).aggregate(
       pipeline
     ).toArray());

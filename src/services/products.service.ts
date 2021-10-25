@@ -54,7 +54,7 @@ class ProductsService extends ResolversOperationsService {
    
     }
     async items2(filter: object = {}) {
-       // let filter: object = { active: { $ne: false } };
+        //let filtro: object = { catregoria: { $eq: false } };
         const page = this.getVariables().pagination?.page;
         const itemsPage = this.getVariables().pagination?.itemsPage;
         console.log(this.getVariables().pagination);
