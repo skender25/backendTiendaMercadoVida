@@ -130,8 +130,8 @@ class ProductsService extends ResolversOperationsService {
         const id = this.getVariables().id;
         const product = this.getVariables().product;
         const productor = this.getVariables().productor;
-        const precio_unidad = this.getVariables().catregoria;
-        const catregoria = this.getVariables().precio_unidad;
+        const precio_unidad = this.getVariables().precio_unidad;
+        const catregoria = this.getVariables().catregoria;
         const unidad = this.getVariables().unidad;
         const org = this.getVariables().org;
         const imagen = this.getVariables().imagen;
