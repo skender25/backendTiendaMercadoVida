@@ -4,11 +4,8 @@
   "description": "Backend Api GraphQL Tienda ",
   "main": "build/server.js",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
-    "start": "node build/server.js",
-    "build": "tsc-p .",
-    "dev": "nodemon \"src/server.ts\" --exec \"ts-node\" \"src/server.ts\" -e ts,graphql,json "
-  },
+    "name": "meang-frontend",   "version": "0.3.0",   "main":"build/server.js",   "scripts": {     "start": "node build/server.js", 
+     "build": "tsc -p . && ncp src/schema build/schema",     "dev": "nodemon \"src/server.ts\" --exec \"ts-node\" \"src/server.ts\" -e ts,graphql,json"   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/skender25/Backend-TIenda.git"
