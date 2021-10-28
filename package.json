@@ -27,7 +27,10 @@
     "url": "https://github.com/skender25/Backend-TIenda/issues"
   },
   "homepage": "https://github.com/skender25/Backend-TIenda#readme",
-  "engines": { "node": "14.17.0", "npm": "7.20.3" },
+  "engines": {
+    "npm": ">=6.0.0",
+    "node": ">=12.0.0"
+  },
   "dependencies": {
     "apollo-server-express": "^2.11.0",
     "bcrypt": "^4.0.1",
